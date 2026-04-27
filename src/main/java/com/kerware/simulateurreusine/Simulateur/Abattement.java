@@ -1,5 +1,7 @@
 package com.kerware.simulateurreusine.Simulateur;
 
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.*;
+
 public class Abattement {
 
     private final ParametreCalculImpot parametreCalculImpot;
@@ -9,15 +11,12 @@ public class Abattement {
     }
 
     private double calculAbattement() {
-        double abt = parametreCalculImpot.getrNet() * ParametreCalculImpotCommun.gettAbt();
+        double abt = parametreCalculImpot.getrNet() * gettAbt();
 
-        if (abt > ParametreCalculImpotCommun.getlAbtMax()) {
-            abt = ParametreCalculImpotCommun.getlAbtMax();
-        } else if (abt < ParametreCalculImpotCommun.getlAbtMin()) {
-            abt = ParametreCalculImpotCommun.getlAbtMin();
-        }
+        if (abt > getlAbtMax()) abt = getlAbtMax();
+        else if (abt < getlAbtMin()) abt = getlAbtMin();
 
-        return abt;
+        return (int) Math.round(abt);
     }
 
      public double calculAbattementNet() {

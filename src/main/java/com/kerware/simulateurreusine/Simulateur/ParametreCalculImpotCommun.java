@@ -18,6 +18,34 @@ public class ParametreCalculImpotCommun {
     private static double decoteMaxDeclarantCouple = 1444;
     private static double tauxDecote = 0.4525;
 
+    private static double nbSeuilEnf = 2;
+    private static double demiPartEnf = 0.5;
+    private static double partEnf = 1;
+    private static double nbPartPacseMarie = 2;
+
+    public static double getPartVeufEnf() {
+        return partVeufEnf;
+    }
+
+    public static double getNbPartPacseMarie() {
+        return nbPartPacseMarie;
+    }
+
+    public static double getPartEnf() {
+        return partEnf;
+    }
+
+    public static double getDemiPartEnf() {
+        return demiPartEnf;
+    }
+
+    public static double getNbSeuilEnf() {
+        return nbSeuilEnf;
+    }
+
+    private static double partVeufEnf = 2;
+
+
     public static int[] getLimites() {
         return limites;
     }
