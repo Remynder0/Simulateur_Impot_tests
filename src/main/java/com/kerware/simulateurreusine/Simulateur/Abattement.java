@@ -1,7 +1,17 @@
 package com.kerware.simulateurreusine.Simulateur;
 
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.*;
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getlAbtMax;
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getlAbtMin;
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.gettAbt;
 
+/**
+ * Gère le calcul de l'abattement forfaitaire appliqué au revenu net.
+ *
+ * Règles appliquées :
+ * - taux forfaitaire {@code tAbt}
+ * - plafond maximum {@code lAbtMax}
+ * - plancher minimum {@code lAbtMin}
+ */
 public class Abattement {
 
     private final ParametreCalculImpot parametreCalculImpot;
@@ -10,6 +20,11 @@ public class Abattement {
         this.parametreCalculImpot = parametreCalculImpot;
     }
 
+    /**
+     * Calcule le montant d'abattement selon les paramètres courants.
+     *
+     * @return montant d'abattement arrondi à l'entier le plus proche
+     */
     private double calculAbattement() {
         double abt = parametreCalculImpot.getrNet() * gettAbt();
 
@@ -19,6 +34,14 @@ public class Abattement {
         return (int) Math.round(abt);
     }
 
+     /**
+      * Calcule le revenu net après abattement.
+      *
+      * La valeur d'abattement calculée est également stockée dans
+      * {@link ParametreCalculImpot#setAbt(double)}.
+      *
+      * @return revenu net après déduction de l'abattement
+      */
      public double calculAbattementNet() {
          parametreCalculImpot.setAbt(calculAbattement());
          return parametreCalculImpot.getrNet() - parametreCalculImpot.getAbt();
