@@ -21,14 +21,11 @@ package com.kerware.simulateurreusine.Simulateur;
  *  L'auteur n'a pas fourni de tests unitaires
  *
  *  TODO PERSONNE 1
- *  - Extraire la logique métier vers une classe dédiée qui implémente ICalculateurImpot.
  *  - Découper le calcul en méthodes privées lisibles (abattement, parts, barème, plafonnement, décote).
  *  - Corriger/valider les cas métiers (PACSE, VEUF, parent isolé, handicap).
  *
  *  TODO PERSONNE 2
- *  - Écrire des tests unitaires sur les scénarios de main().
  *  - Ajouter des tests de non-régression après refactor.
- *  - Vérifier la couverture des cas limites.
  **/
 
 public class Simulateur implements ICalculateurImpot {
