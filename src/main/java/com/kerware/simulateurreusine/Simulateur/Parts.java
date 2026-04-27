@@ -11,7 +11,7 @@ public class Parts {
         this.p = p;
     }
 
-    private void calculParts() {
+    private void calculPartsDeclarant() {
         p.setNbPtsDecl(1);
 
         switch (p.getSitFam()) {
@@ -28,16 +28,32 @@ public class Parts {
             default:
                 break;
         }
+    }
 
+    private void calculPartsEnfants() {
+
+        // Enfant à charge
         if (p.getNbEnf() <= getNbSeuilEnf()) {
             p.setNbPts(p.getNbPtsDecl() + p.getNbEnf() * getDemiPartEnf());
         } else if (p.getNbEnf() > getNbSeuilEnf()) {
             p.setNbPts(p.getNbPtsDecl() + getPartEnf() + (p.getNbEnf() - getNbSeuilEnf()));
         }
+
+        // Parent Isolé
+        if (p.isParIso()) {
+            if (p.getNbEnf() > 0) {
+                p.setNbPts(p.getNbPts() + getDemiPartEnf());
+            }
+        }
+
+        // Enfant handicapé
+        p.setNbPts(p.getNbPts() + p.getNbEnfH() * getDemiPartEnf());
     }
 
     public double calculPartsNet() {
-        calculParts();
+        calculPartsDeclarant();
+        calculPartsEnfants();
+        p.setNbPtsTotal(p.getNbPts() + p.getNbPtsDecl());
         return p.getNbPts();
     }
 }

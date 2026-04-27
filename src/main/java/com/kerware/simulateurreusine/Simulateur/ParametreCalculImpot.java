@@ -11,6 +11,7 @@ public class ParametreCalculImpot {
 
     private double abt = 0;
 
+    private double nbPtsTotal = 0;
     private double nbPtsDecl = 0;
     private double nbPts = 0;
     private double decote = 0;
@@ -134,5 +135,13 @@ public class ParametreCalculImpot {
 
     public void setImpotRevenuNet(int impotRevenuNet) {
         this.impotRevenuNet = impotRevenuNet;
+    }
+
+    public double getNbPtsTotal() {
+        return nbPtsTotal;
+    }
+
+    public void setNbPtsTotal(double nbPtsTotal) {
+        this.nbPtsTotal = nbPtsTotal;
     }
 }
