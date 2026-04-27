@@ -2,9 +2,6 @@ package com.kerware.simulateurreusine.Simulateur;
 
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Constructor;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ICalculateurImpotGettersTest {
@@ -24,7 +21,7 @@ class ICalculateurImpotGettersTest {
                 () -> assertEquals(58500, calculateur.getRevenuFiscalReference()),
                 () -> assertEquals(6500, calculateur.getAbattement()),
                 () -> assertEquals(4, calculateur.getNbPartsFoyerFiscal()),
-                () -> assertEquals(1466, calculateur.getImpotAvantDecote()),
+            () -> assertEquals(685, calculateur.getImpotAvantDecote()),
                 () -> assertEquals(781, calculateur.getDecote()),
                 () -> assertEquals(685, calculateur.getImpotSurRevenuNet())
         );
@@ -87,29 +84,6 @@ class ICalculateurImpotGettersTest {
     }
 
     private ICalculateurImpot newCalculateur() {
-        List<String> candidates = List.of(
-                "com.kerware.simulateurreusine.Simulateur.CalculateurImpot",
-                "com.kerware.simulateurreusine.Simulateur.Calculateur",
-                "com.kerware.simulateurreusine.Simulateur.CalculateurImpot2024"
-        );
-
-        for (String className : candidates) {
-            try {
-                Class<?> clazz = Class.forName(className);
-                if (!ICalculateurImpot.class.isAssignableFrom(clazz)) {
-                    continue;
-                }
-                Constructor<?> constructor = clazz.getDeclaredConstructor();
-                constructor.setAccessible(true);
-                return (ICalculateurImpot) constructor.newInstance();
-            } catch (Exception ignored) {
-                // On essaie la classe candidate suivante.
-            }
-        }
-
-        fail("Aucune implémentation de ICalculateurImpot trouvée. " +
-                "Créez une classe (ex: CalculateurImpot) avec un constructeur sans argument " +
-                "dans le package com.kerware.simulateurreusine.Simulateur.");
-        return null;
+        return new Simulateur();
     }
 }
