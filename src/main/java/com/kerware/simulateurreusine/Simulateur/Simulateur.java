@@ -31,7 +31,7 @@ package com.kerware.simulateurreusine.Simulateur;
  *  - Vérifier la couverture des cas limites.
  **/
 
-public class Simulateur {
+public class Simulateur implements ICalculateurImpot {
 
 
 
@@ -82,6 +82,10 @@ public class Simulateur {
     private double mImp = 0;
 
     private boolean parIso = false;
+
+    private SituationFamiliale sitFam = SituationFamiliale.CELIBATAIRE;
+
+    private int impotRevenuNet = 0;
 
 
     // Fonction de calcul de l'impôt sur le revenu net en France en 2024 sur les revenu 2023
@@ -250,4 +254,51 @@ public class Simulateur {
 
     }
 
+    public void setRevenusNet(int rn) {
+        rNet = rn;
+    }
+
+    public void setSituationFamiliale(SituationFamiliale sf) {
+        sitFam = sf;
+    }
+
+    public void setNbEnfantsACharge(int nbe) {
+        nbEnf = nbe;
+    }
+
+    public void setNbEnfantsSituationHandicap(int nbesh) {
+        nbEnfH = nbesh;
+    }
+
+    public void setParentIsole(boolean pi) {
+        parIso = pi;
+    }
+
+    public void calculImpotSurRevenuNet() {
+        impotRevenuNet = Math.toIntExact(calculImpot(rNet, sitFam, nbEnf, nbEnfH, parIso));
+    }
+
+    public int getRevenuFiscalReference() {
+        return (int) rFRef;
+    }
+
+    public int getAbattement() {
+        return (int) abt;
+    }
+
+    public int getNbPartsFoyerFiscal() {
+        return (int) nbPts;
+    }
+
+    public int getImpotAvantDecote() {
+        return (int) mImp;
+    }
+
+    public int getDecote() {
+        return (int) decote;
+    }
+
+    public int getImpotSurRevenuNet() {
+        return impotRevenuNet;
+    }
 }
