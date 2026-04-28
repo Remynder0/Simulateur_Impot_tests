@@ -12,11 +12,11 @@ import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommu
  * - plafond maximum {@code lAbtMax}
  * - plancher minimum {@code lAbtMin}
  */
-public class Abattement {
+public class CalculAbattement {
 
     private final ParametreCalculImpot parametreCalculImpot;
 
-    public Abattement(ParametreCalculImpot parametreCalculImpot) {
+    public CalculAbattement(ParametreCalculImpot parametreCalculImpot) {
         this.parametreCalculImpot = parametreCalculImpot;
     }
 

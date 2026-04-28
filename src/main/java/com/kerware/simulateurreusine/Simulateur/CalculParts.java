@@ -15,11 +15,12 @@ import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommu
  * - ajout des demi-parts pour les enfants à charge et des majorations
  *   (au-delà d'un seuil d'enfants)
  */
-public class Parts {
+
+public class CalculParts {
 
     private final ParametreCalculImpot p;
 
-    public Parts(ParametreCalculImpot p) {
+    public CalculParts(ParametreCalculImpot p) {
         this.p = p;
     }
 
@@ -31,7 +32,7 @@ public class Parts {
      * La logique suit les règles métier contenues dans
      * {@link ParametreCalculImpotCommun} (valeurs de demi-part, seuils, plafonds).
      */
-    private void calculParts() {
+    private void calculPartsDeclarant() {
         p.setNbPtsDecl(1);
 
         switch (p.getSitFam()) {
@@ -48,12 +49,26 @@ public class Parts {
             default:
                 break;
         }
+    }
 
+    private void calculPartsEnfants() {
+
+        // Enfant à charge
         if (p.getNbEnf() <= getNbSeuilEnf()) {
             p.setNbPts(p.getNbPtsDecl() + p.getNbEnf() * getDemiPartEnf());
         } else if (p.getNbEnf() > getNbSeuilEnf()) {
             p.setNbPts(p.getNbPtsDecl() + getPartEnf() + (p.getNbEnf() - getNbSeuilEnf()));
         }
+
+        // Parent Isolé
+        if (p.isParIso()) {
+            if (p.getNbEnf() > 0) {
+                p.setNbPts(p.getNbPts() + getDemiPartEnf());
+            }
+        }
+
+        // Enfant handicapé
+        p.setNbPts(p.getNbPts() + p.getNbEnfH() * getDemiPartEnf());
     }
 
     /**
@@ -62,7 +77,9 @@ public class Parts {
      * @return nombre total de parts (peut contenir des demi-parts)
      */
     public double calculPartsNet() {
-        calculParts();
+        calculPartsDeclarant();
+        calculPartsEnfants();
+        p.setNbPtsTotal(p.getNbPts() + p.getNbPtsDecl());
         return p.getNbPts();
     }
 }
