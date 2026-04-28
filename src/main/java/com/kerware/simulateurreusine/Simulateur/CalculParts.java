@@ -79,7 +79,7 @@ public class CalculParts {
     public double calculPartsNet() {
         calculPartsDeclarant();
         calculPartsEnfants();
-        p.setNbPtsTotal(p.getNbPts() + p.getNbPtsDecl());
+        p.setNbPtsTotal(p.getNbPts());
         return p.getNbPts();
     }
 }

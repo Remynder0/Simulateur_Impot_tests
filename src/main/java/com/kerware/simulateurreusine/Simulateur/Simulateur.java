@@ -70,7 +70,8 @@ public class Simulateur implements ICalculateurImpot {
 
         CalculAbattement calculAbattement = new CalculAbattement(parametreCalculImpot);
 
-        calculAbattement.calculAbattementNet();
+        double revenuFiscalReference = calculAbattement.calculAbattementNet();
+        parametreCalculImpot.setrFRef(revenuFiscalReference);
 
         System.out.println("Abattement : " + parametreCalculImpot.getAbt());
 
@@ -82,7 +83,8 @@ public class Simulateur implements ICalculateurImpot {
 
         CalculImpotTranche calculImpotTranche = new CalculImpotTranche(parametreCalculImpot);
 
-        calculImpotTranche.calculImpot();
+        double impotApresPlafonnement = calculImpotTranche.calculImpot();
+        parametreCalculImpot.setmImp(impotApresPlafonnement);
 
         System.out.println("Impot avant décote : " + parametreCalculImpot.getmImp());
 
@@ -91,6 +93,7 @@ public class Simulateur implements ICalculateurImpot {
         calculDecote.Decote();
 
         System.out.println("Decote : " + parametreCalculImpot.getDecote());
+        parametreCalculImpot.setImpotRevenuNet((int) Math.round(parametreCalculImpot.getmImp()));
 
         return (long) parametreCalculImpot.getmImp();
     }

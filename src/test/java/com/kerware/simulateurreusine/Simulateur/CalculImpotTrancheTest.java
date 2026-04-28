@@ -83,7 +83,7 @@ class CalculImpotTrancheTest {
 
         assertAll(
             () -> assertEquals(8286d, p.getmImpDecl()),
-            () -> assertEquals(1508d, p.getmImp()),
+            () -> assertEquals(3015d, p.getmImp()),
             () -> assertEquals(4768d, impot)
         );
     }
@@ -100,8 +100,8 @@ class CalculImpotTrancheTest {
 
         assertAll(
             () -> assertEquals(2286d, p.getmImpDecl()),
-            () -> assertEquals(408d, p.getmImp()),
-            () -> assertEquals(408d, impot)
+            () -> assertEquals(815d, p.getmImp()),
+            () -> assertEquals(815d, impot)
         );
     }
 }

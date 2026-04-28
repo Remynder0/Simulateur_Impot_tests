@@ -1,7 +1,12 @@
 package com.kerware.simulateurreusine.Simulateur;
 
 
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.*;
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getDecoteMaxDeclarantCouple;
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getDecoteMaxDeclarantSeul;
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getNbPartPacseMarie;
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getSeuilDecoteDeclarantCouple;
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getSeuilDecoteDeclarantSeul;
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getTauxDecote;
 
 public class CalculDecote {
 
@@ -29,6 +34,7 @@ public class CalculDecote {
             decote = p.getmImp();
         }
 
+        p.setDecote(decote);
         p.setmImp(Math.round(p.getmImp() - decote));
     }
 }

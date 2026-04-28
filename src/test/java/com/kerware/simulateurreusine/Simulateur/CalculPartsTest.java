@@ -20,7 +20,7 @@ class CalculPartsTest {
         assertAll(
             () -> assertEquals(1d, p.getNbPtsDecl()),
             () -> assertEquals(1d, nbPartsNet),
-            () -> assertEquals(2d, p.getNbPtsTotal())
+            () -> assertEquals(1d, p.getNbPtsTotal())
         );
     }
 
@@ -38,7 +38,7 @@ class CalculPartsTest {
         assertAll(
             () -> assertEquals(2d, p.getNbPtsDecl()),
             () -> assertEquals(4d, nbPartsNet),
-            () -> assertEquals(6d, p.getNbPtsTotal())
+            () -> assertEquals(4d, p.getNbPtsTotal())
         );
     }
 
@@ -56,7 +56,7 @@ class CalculPartsTest {
         assertAll(
             () -> assertEquals(ParametreCalculImpotCommun.getPartVeufEnf(), p.getNbPtsDecl()),
             () -> assertEquals(3.5d, nbPartsNet),
-            () -> assertEquals(5.5d, p.getNbPtsTotal())
+            () -> assertEquals(3.5d, p.getNbPtsTotal())
         );
     }
 }
