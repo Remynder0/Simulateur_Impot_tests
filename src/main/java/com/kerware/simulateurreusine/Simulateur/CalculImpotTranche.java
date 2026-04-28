@@ -1,5 +1,7 @@
 package com.kerware.simulateurreusine.Simulateur;
 
+import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.*;
+
 public class CalculImpotTranche {
 
     private final ParametreCalculImpot p;
@@ -20,8 +22,8 @@ public class CalculImpotTranche {
 
     private double calcul(double rFRef, double nbParts) {
         double impot = 0;
-        int[] limites = ParametreCalculImpotCommun.getLimites();
-        double[] taux = ParametreCalculImpotCommun.getTaux();
+        int[] limites = getLimites();
+        double[] taux = getTaux();
 
         p.setrImposable(rFRef / nbParts);
 
@@ -48,7 +50,7 @@ public class CalculImpotTranche {
 
         double ecartParts = p.getNbPtsTotal() - p.getNbPtsDecl();
 
-        double plafond = (ecartParts / 0.5) * ParametreCalculImpotCommun.getPlafDemiPart();
+        double plafond = (ecartParts / 0.5) * getPlafDemiPart();
 
         if ( baisseImpot >= plafond ) {
             return p.getmImpDecl() - plafond;
