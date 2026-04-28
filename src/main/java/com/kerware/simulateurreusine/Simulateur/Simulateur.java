@@ -20,9 +20,6 @@ package com.kerware.simulateurreusine.Simulateur;
  *  Il s'agit d'un "legacy" code qui est difficile à maintenir
  *  L'auteur n'a pas fourni de tests unitaires
  *
- *  TODO PERSONNE 1
- *  - Découper le calcul en méthodes privées lisibles (abattement, parts, barème, plafonnement, décote).
- *  - Corriger/valider les cas métiers (PACSE, VEUF, parent isolé, handicap).
  *
  *  TODO PERSONNE 2
  *  - Ajouter des tests de non-régression après refactor.

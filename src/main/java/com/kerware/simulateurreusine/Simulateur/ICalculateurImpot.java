@@ -1,12 +1,6 @@
 package com.kerware.simulateurreusine.Simulateur;
 
 /**
- * TODO PERSONNE 1
- *  - Créer une classe (ex: CalculateurImpot) qui implémente cette interface.
- *  - Implémenter la saisie des entrées via les setters.
- *  - Implémenter calculImpotSurRevenuNet().
- *  - Implémenter les 6 getters de résultat.
- * 
  * Contrat d'un calculateur d'impôt sur le revenu.
  *
  * Les entrées sont fournies via les setters, puis le calcul est déclenché avec
