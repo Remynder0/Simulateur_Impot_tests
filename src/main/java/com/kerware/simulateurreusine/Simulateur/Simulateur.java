@@ -27,7 +27,7 @@ package com.kerware.simulateurreusine.Simulateur;
 
 public class Simulateur implements ICalculateurImpot {
 
-
+    ParametreCalculImpot parametreCalculImpot = new ParametreCalculImpot();
 
     private int l00 = 0 ;
     private int l01 = 11294;
@@ -86,147 +86,37 @@ public class Simulateur implements ICalculateurImpot {
 
     public long calculImpot( int revNet, SituationFamiliale sitFam, int nbEnfants, int nbEnfantsHandicapes, boolean parentIsol) {
 
-        rNet = revNet;
+        parametreCalculImpot.setrNet(revNet);
+        parametreCalculImpot.setSitFam(sitFam);
+        parametreCalculImpot.setNbEnf(nbEnfants);
+        parametreCalculImpot.setNbEnfH(nbEnfantsHandicapes);
+        parametreCalculImpot.setParIso(parentIsol);
 
-        nbEnf = nbEnfants;
-        nbEnfH = nbEnfantsHandicapes;
-        parIso = parentIsol;
+        CalculAbattement calculAbattement = new CalculAbattement(parametreCalculImpot);
 
-        limites[0] = l00;
-        limites[1] = l01;
-        limites[2] = l02;
-        limites[3] = l03;
-        limites[4] = l04;
-        limites[5] = l05;
+        calculAbattement.calculAbattementNet();
 
-        taux[0] = t00;
-        taux[1] = t01;
-        taux[2] = t02;
-        taux[3] = t03;
-        taux[4] = t04;
+        System.out.println("Abattement : " + parametreCalculImpot.getAbt());
 
-        // Abattement
+        CalculParts calculParts = new CalculParts(parametreCalculImpot);
 
-        abt = rNet * tAbt;
+        calculParts.calculPartsNet();
 
-        if (abt > lAbtMax) {
-            abt = lAbtMax;
-        }
+        System.out.println("Nombre de parts : " + parametreCalculImpot.getNbPtsTotal());
 
-        if (abt < lAbtMin) {
-            abt = lAbtMin;
-        }
+        CalculImpotTranche calculImpotTranche = new CalculImpotTranche(parametreCalculImpot);
 
+        calculImpotTranche.calculImpot();
 
-        rFRef = rNet - abt;
+        System.out.println("Impot avant décote : " + parametreCalculImpot.getmImp());
 
-        // parts déclarants
-        switch ( sitFam ) {
-            case CELIBATAIRE:
-                nbPtsDecl = 1;
-                break;
-            case MARIE:
-                nbPtsDecl = 2;
-                break;
-            case DIVORCE:
-                nbPtsDecl = 1;
-                break;
-            case VEUF:
-                if ( nbEnf == 0 ) {
-                    nbPtsDecl = 1;
-                } else {
-                    nbPtsDecl = 2;
-                }
-                nbPtsDecl = 1;
-                break;
-        }
+        CalculDecote calculDecote = new CalculDecote(parametreCalculImpot);
 
-        // parts enfants à charge
-        if ( nbEnf <= 2 ) {
-            nbPts = nbPtsDecl + nbEnf * 0.5;
-        } else if ( nbEnf > 2 ) {
-            nbPts = nbPtsDecl+  1.0 + ( nbEnf - 2 );
-        }
+        calculDecote.Decote();
 
-        // parent isolé
-        if ( parIso ) {
-            if ( nbEnf > 0 ){
-                nbPts = nbPts + 0.5;
-            }
-        }
+        System.out.println("Decote : " + parametreCalculImpot.getDecote());
 
-        // enfant handicapé
-        nbPts = nbPts + nbEnfH * 0.5;
-
-        // impôt des declarants
-        rImposable = rFRef / nbPtsDecl ;
-
-        mImpDecl = 0;
-
-        int i = 0;
-        do {
-            if ( rImposable >= limites[i] && rImposable < limites[i+1] ) {
-                mImpDecl += ( rImposable - limites[i] ) * taux[i];
-                break;
-            } else {
-                mImpDecl += ( limites[i+1] - limites[i] ) * taux[i];
-            }
-            i++;
-        } while( i < 5);
-
-        mImpDecl = mImpDecl * nbPtsDecl;
-        mImpDecl = Math.round( mImpDecl );
-
-        // impôt foyer fiscal complet
-        rImposable =  rFRef / nbPts;
-        mImp = 0;
-        i = 0;
-
-        do {
-            if ( rImposable >= limites[i] && rImposable < limites[i+1] ) {
-                mImp += ( rImposable - limites[i] ) * taux[i];
-                break;
-            } else {
-                mImp += ( limites[i+1] - limites[i] ) * taux[i];
-            }
-            i++;
-        } while( i < 5);
-
-        mImp = mImp * nbPts;
-        mImp = Math.round( mImp );
-
-        // baisse impot
-        double baisseImpot = mImpDecl - mImp;
-
-        // dépassement plafond
-        double ecartPts = nbPts - nbPtsDecl;
-
-        double plafond = (ecartPts / 0.5) * plafDemiPart;
-
-        if ( baisseImpot >= plafond ) {
-            mImp = mImpDecl - plafond;
-        }
-
-        decote = 0;
-        // decote
-        if ( nbPtsDecl == 1 ) {
-            if ( mImp < seuilDecoteDeclarantSeul ) {
-                 decote = decoteMaxDeclarantSeul - ( mImp  * tauxDecote );
-            }
-        }
-        if (  nbPtsDecl == 2 ) {
-            if ( mImp < seuilDecoteDeclarantCouple ) {
-                 decote =  decoteMaxDeclarantCouple - ( mImp  * tauxDecote  );
-            }
-        }
-        decote = Math.round( decote );
-        if ( mImp <= decote ) {
-            decote = mImp;
-        }
-
-        mImp = mImp - decote;
-
-        return Math.round( mImp );
+        return (long) parametreCalculImpot.getmImp();
     }
 
     public static void main(String[] args) {
@@ -249,50 +139,50 @@ public class Simulateur implements ICalculateurImpot {
     }
 
     public void setRevenusNet(int rn) {
-        rNet = rn;
+        parametreCalculImpot.setrNet(rn);
     }
 
     public void setSituationFamiliale(SituationFamiliale sf) {
-        sitFam = sf;
+        parametreCalculImpot.setSitFam(sf);
     }
 
     public void setNbEnfantsACharge(int nbe) {
-        nbEnf = nbe;
+        parametreCalculImpot.setNbEnf(nbe);
     }
 
     public void setNbEnfantsSituationHandicap(int nbesh) {
-        nbEnfH = nbesh;
+        parametreCalculImpot.setNbEnfH(nbesh);
     }
 
     public void setParentIsole(boolean pi) {
-        parIso = pi;
+        parametreCalculImpot.setParIso(pi);
     }
 
     public void calculImpotSurRevenuNet() {
-        impotRevenuNet = Math.toIntExact(calculImpot(rNet, sitFam, nbEnf, nbEnfH, parIso));
+        calculImpot( parametreCalculImpot.getrNet(), parametreCalculImpot.getSitFam(), parametreCalculImpot.getNbEnf(), parametreCalculImpot.getNbEnfH(), parametreCalculImpot.isParIso() );
     }
 
     public int getRevenuFiscalReference() {
-        return (int) rFRef;
+        return (int) parametreCalculImpot.getrFRef();
     }
 
     public int getAbattement() {
-        return (int) abt;
+        return (int) parametreCalculImpot.getAbt();
     }
 
     public int getNbPartsFoyerFiscal() {
-        return (int) nbPts;
+        return (int) parametreCalculImpot.getNbPtsTotal();
     }
 
     public int getImpotAvantDecote() {
-        return (int) mImp;
+        return (int) parametreCalculImpot.getmImp();
     }
 
     public int getDecote() {
-        return (int) decote;
+        return (int) parametreCalculImpot.getDecote();
     }
 
     public int getImpotSurRevenuNet() {
-        return impotRevenuNet;
+        return parametreCalculImpot.getImpotRevenuNet();
     }
 }
