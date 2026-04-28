@@ -2,12 +2,12 @@ package com.kerware.simulateurreusine.Simulateur;
 
 import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.*;
 
-public class Parts {
+public class CalculParts {
 
     private final ParametreCalculImpot p;
 
 
-    public Parts(ParametreCalculImpot p) {
+    public CalculParts(ParametreCalculImpot p) {
         this.p = p;
     }
 
