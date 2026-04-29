@@ -12,7 +12,7 @@ class CalculDecoteTest {
         p.setmImp(1000);
 
         CalculDecote calculDecote = new CalculDecote(p);
-        calculDecote.Decote();
+        calculDecote.calculerDecote();
 
         assertEquals(579d, p.getmImp());
     }
@@ -24,7 +24,7 @@ class CalculDecoteTest {
         p.setmImp(3000);
 
         CalculDecote calculDecote = new CalculDecote(p);
-        calculDecote.Decote();
+        calculDecote.calculerDecote();
 
         assertEquals(2913d, p.getmImp());
     }
@@ -36,7 +36,7 @@ class CalculDecoteTest {
         p.setmImp(100);
 
         CalculDecote calculDecote = new CalculDecote(p);
-        calculDecote.Decote();
+        calculDecote.calculerDecote();
 
         assertEquals(0d, p.getmImp());
     }
@@ -48,7 +48,7 @@ class CalculDecoteTest {
         p.setmImp(ParametreCalculImpotCommun.getSeuilDecoteDeclarantSeul());
 
         CalculDecote calculDecote = new CalculDecote(p);
-        calculDecote.Decote();
+        calculDecote.calculerDecote();
 
         assertEquals(ParametreCalculImpotCommun.getSeuilDecoteDeclarantSeul(), p.getmImp());
     }

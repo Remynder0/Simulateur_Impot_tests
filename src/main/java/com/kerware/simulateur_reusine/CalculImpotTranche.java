@@ -1,5 +1,6 @@
 package com.kerware.simulateur_reusine;
 
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getDemiPartEnf;
 import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getLimites;
 import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getPlafDemiPart;
 import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getTaux;
@@ -10,61 +11,66 @@ import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getTaux;
  * La classe applique les tranches progressives puis le plafonnement lié aux
  * demi-parts supplémentaires du foyer.
  */
-public class CalculImpotTranche {
+public final class CalculImpotTranche {
 
-    private final ParametreCalculImpot p;
+    private static final int FIRST_INDEX = 0;
+    private static final int NEXT_INDEX = 1;
+
+    private final ParametreCalculImpot parametreCalculImpot;
 
 
-    public CalculImpotTranche(ParametreCalculImpot p) {
-        this.p = p;
+    public CalculImpotTranche(ParametreCalculImpot parametreCalculImpotLocal) {
+        parametreCalculImpot = parametreCalculImpotLocal;
     }
 
     public double calculImpot() {
 
-        p.setmImpDecl(calcul(p.getrFRef(), p.getNbPtsDecl()));
-        p.setmImp(calcul(p.getrFRef(), p.getNbPtsTotal()));
+        parametreCalculImpot.setmImpDecl(
+                calcul(parametreCalculImpot.getrFRef(), parametreCalculImpot.getNbPtsDecl()));
+        parametreCalculImpot.setmImp(
+                calcul(parametreCalculImpot.getrFRef(), parametreCalculImpot.getNbPtsTotal()));
 
 
-        return (int) Math.round(plafonnement());
+        return Math.round(plafonnement());
     }
 
-    private double calcul(double rFRef, double nbParts) {
+    private double calcul(double revenuFiscalReference, double nbParts) {
         double impot = 0;
         int[] limites = getLimites();
         double[] taux = getTaux();
 
-        p.setrImposable(rFRef / nbParts);
+        parametreCalculImpot.setrImposable(revenuFiscalReference / nbParts);
 
-        if ( p.getrImposable() < limites[1] ) {
-            impot = p.getrImposable() * taux[0];
-        } else if ( p.getrImposable() < limites[2] ) {
-            impot = ( limites[1] - limites[0] ) * taux[0] + ( p.getrImposable() - limites[1] ) * taux[1];
-        } else if ( p.getrImposable() < limites[3] ) {
-            impot = ( limites[1] - limites[0] ) * taux[0] + ( limites[2] - limites[1] ) * taux[1] + ( p.getrImposable() - limites[2] ) * taux[2];
-        } else if ( p.getrImposable() < limites[4] ) {
-            impot = ( limites[1] - limites[0] ) * taux[0] + ( limites[2] - limites[1] ) * taux[1] + ( limites[3] - limites[2] ) * taux[2] + ( p.getrImposable() - limites[3] ) * taux[3];
-        } else {
-            impot = ( limites[1] - limites[0] ) * taux[0] + ( limites[2] - limites[1] ) * taux[1] + ( limites[3] - limites[2] ) * taux[2] + ( limites[4] - limites[3]) * taux [3]+ ( p.getrImposable() - limites [4]) * taux [4];
+        for (int index = FIRST_INDEX; index < taux.length; index++) {
+            double debutTranche = limites[index];
+            double finTranche = limites[index + NEXT_INDEX];
+
+            if (parametreCalculImpot.getrImposable() < finTranche) {
+                impot += (parametreCalculImpot.getrImposable() - debutTranche) * taux[index];
+                return Math.round(impot * nbParts);
+            }
+
+            impot += (finTranche - debutTranche) * taux[index];
         }
 
-        impot = impot * nbParts;
-
-        return (int) Math.round(impot);
+        return Math.round(impot * nbParts);
     }
 
-    private double plafonnement(){
+    private double plafonnement() {
 
-        double baisseImpot = p.getmImpDecl() - p.getmImp();
+        double baisseImpot = parametreCalculImpot.getmImpDecl() - parametreCalculImpot.getmImp();
 
-        double ecartParts = p.getNbPtsTotal() - p.getNbPtsDecl();
+        double ecartParts = parametreCalculImpot.getNbPtsTotal()
+            - parametreCalculImpot.getNbPtsDecl();
 
-        double plafond = (ecartParts / 0.5) * getPlafDemiPart();
+        double plafond = (ecartParts / getDemiPartEnf())
+            * getPlafDemiPart();
 
         if ( baisseImpot >= plafond ) {
-            return p.getmImpDecl() - plafond;
-        } else {
-            return p.getmImp();
+            return parametreCalculImpot.getmImpDecl() - plafond;
         }
+
+        return parametreCalculImpot.getmImp();
 
     }
 }

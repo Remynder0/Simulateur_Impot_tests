@@ -12,12 +12,12 @@ import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.gettAbt;
  * - plafond maximum {@code lAbtMax}
  * - plancher minimum {@code lAbtMin}
  */
-public class CalculAbattement {
+public final class CalculAbattement {
 
     private final ParametreCalculImpot parametreCalculImpot;
 
-    public CalculAbattement(ParametreCalculImpot parametreCalculImpot) {
-        this.parametreCalculImpot = parametreCalculImpot;
+    public CalculAbattement(ParametreCalculImpot parametreCalculImpotLocal) {
+        parametreCalculImpot = parametreCalculImpotLocal;
     }
 
     /**
@@ -26,12 +26,15 @@ public class CalculAbattement {
      * @return montant d'abattement arrondi à l'entier le plus proche
      */
     private double calculAbattement() {
-        double abt = parametreCalculImpot.getrNet() * gettAbt();
+        double abattement = parametreCalculImpot.getrNet() * gettAbt();
 
-        if (abt > getlAbtMax()) abt = getlAbtMax();
-        else if (abt < getlAbtMin()) abt = getlAbtMin();
+        if (abattement > getlAbtMax()) {
+            abattement = getlAbtMax();
+        } else if (abattement < getlAbtMin()) {
+            abattement = getlAbtMin();
+        }
 
-        return (int) Math.round(abt);
+        return Math.round(abattement);
     }
 
      /**

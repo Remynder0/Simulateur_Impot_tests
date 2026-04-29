@@ -16,12 +16,12 @@ import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getPartV
  *   (au-delà d'un seuil d'enfants)
  */
 
-public class CalculParts {
+public final class CalculParts {
 
-    private final ParametreCalculImpot p;
+    private final ParametreCalculImpot parametreCalculImpot;
 
-    public CalculParts(ParametreCalculImpot p) {
-        this.p = p;
+    public CalculParts(ParametreCalculImpot parametreCalculImpotLocal) {
+        parametreCalculImpot = parametreCalculImpotLocal;
     }
 
     /**
@@ -33,18 +33,20 @@ public class CalculParts {
      * {@link ParametreCalculImpotCommun} (valeurs de demi-part, seuils, plafonds).
      */
     private void calculPartsDeclarant() {
-        p.setNbPtsDecl(1);
+        parametreCalculImpot.setNbPtsDecl(1);
 
-        switch (p.getSitFam()) {
+        switch (parametreCalculImpot.getSitFam()) {
             case CELIBATAIRE:
                 break;
             case PACSE, MARIE:
-                p.setNbPtsDecl(getNbPartPacseMarie());
+                parametreCalculImpot.setNbPtsDecl(getNbPartPacseMarie());
                 break;
             case DIVORCE:
                 break;
             case VEUF:
-                if ( p.getNbEnf() > 0 ) p.setNbPtsDecl(getPartVeufEnf());
+                if (parametreCalculImpot.getNbEnf() > 0) {
+                    parametreCalculImpot.setNbPtsDecl(getPartVeufEnf());
+                }
                 break;
             default:
                 break;
@@ -54,21 +56,26 @@ public class CalculParts {
     private void calculPartsEnfants() {
 
         // Enfant à charge
-        if (p.getNbEnf() <= getNbSeuilEnf()) {
-            p.setNbPts(p.getNbPtsDecl() + p.getNbEnf() * getDemiPartEnf());
-        } else if (p.getNbEnf() > getNbSeuilEnf()) {
-            p.setNbPts(p.getNbPtsDecl() + getPartEnf() + (p.getNbEnf() - getNbSeuilEnf()));
+        if (parametreCalculImpot.getNbEnf() <= getNbSeuilEnf()) {
+                parametreCalculImpot.setNbPts(
+                    parametreCalculImpot.getNbPtsDecl()
+                        + parametreCalculImpot.getNbEnf() * getDemiPartEnf());
+        } else {
+            parametreCalculImpot.setNbPts(
+                    parametreCalculImpot.getNbPtsDecl()
+                        + getPartEnf()
+                            + (parametreCalculImpot.getNbEnf() - getNbSeuilEnf()));
         }
 
         // Parent Isolé
-        if (p.isParIso()) {
-            if (p.getNbEnf() > 0) {
-                p.setNbPts(p.getNbPts() + getDemiPartEnf());
-            }
+        if (parametreCalculImpot.isParIso() && parametreCalculImpot.getNbEnf() > 0) {
+            parametreCalculImpot.setNbPts(parametreCalculImpot.getNbPts() + getDemiPartEnf());
         }
 
         // Enfant handicapé
-        p.setNbPts(p.getNbPts() + p.getNbEnfH() * getDemiPartEnf());
+        parametreCalculImpot.setNbPts(
+            parametreCalculImpot.getNbPts()
+                + parametreCalculImpot.getNbEnfH() * getDemiPartEnf());
     }
 
     /**
@@ -79,7 +86,7 @@ public class CalculParts {
     public double calculPartsNet() {
         calculPartsDeclarant();
         calculPartsEnfants();
-        p.setNbPtsTotal(p.getNbPts());
-        return p.getNbPts();
+        parametreCalculImpot.setNbPtsTotal(parametreCalculImpot.getNbPts());
+        return parametreCalculImpot.getNbPts();
     }
 }

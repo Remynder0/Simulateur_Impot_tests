@@ -6,93 +6,96 @@ package com.kerware.simulateur_reusine;
  * La classe centralise les barèmes, plafonds et seuils pour éviter de dupliquer
  * les constantes dans chaque étape du calcul.
  */
-public class ParametreCalculImpotCommun {
+public final class ParametreCalculImpotCommun {
 
-    private static int[] limites = new int[]{0, 11294, 28797, 82341, 177106, Integer.MAX_VALUE};
-    private static double[] taux = new double[]{0.0, 0.11, 0.3, 0.41, 0.45};
+    private static final int[] LIMITES = new int[] {
+        0, 11294, 28797, 82341, 177106, Integer.MAX_VALUE
+    };
+    private static final double[] TAUX = new double[] {0.0, 0.11, 0.3, 0.41, 0.45};
 
-    private static int lAbtMax = 14171;
-    private static int lAbtMin = 495;
-    private static double tAbt = 0.1;
+    private static final int L_ABT_MAX = 14171;
+    private static final int L_ABT_MIN = 495;
+    private static final double T_ABT = 0.1;
 
-    private static double plafDemiPart = 1759;
+    private static final double PLAF_DEMI_PART = 1759;
 
-    private static double seuilDecoteDeclarantSeul = 1929;
-    private static double seuilDecoteDeclarantCouple    = 3191;
+    private static final double SEUIL_DECOTE_DECLARANT_SEUL = 1929;
+    private static final double SEUIL_DECOTE_DECLARANT_COUPLE = 3191;
 
-    private static double decoteMaxDeclarantSeul = 873;
-    private static double decoteMaxDeclarantCouple = 1444;
-    private static double tauxDecote = 0.4525;
+    private static final double DECOTE_MAX_DECLARANT_SEUL = 873;
+    private static final double DECOTE_MAX_DECLARANT_COUPLE = 1444;
+    private static final double TAUX_DECOTE = 0.4525;
 
-    private static double nbSeuilEnf = 2;
-    private static double demiPartEnf = 0.5;
-    private static double partEnf = 1;
-    private static double nbPartPacseMarie = 2;
+    private static final double NB_SEUIL_ENF = 2;
+    private static final double DEMI_PART_ENF = 0.5;
+    private static final double PART_ENF = 1;
+    private static final double NB_PART_PACSE_MARIE = 2;
+    private static final double PART_VEUF_ENF = 2;
+
+    private ParametreCalculImpotCommun() {
+    }
 
     public static double getPartVeufEnf() {
-        return partVeufEnf;
+        return PART_VEUF_ENF;
     }
 
     public static double getNbPartPacseMarie() {
-        return nbPartPacseMarie;
+        return NB_PART_PACSE_MARIE;
     }
 
     public static double getPartEnf() {
-        return partEnf;
+        return PART_ENF;
     }
 
     public static double getDemiPartEnf() {
-        return demiPartEnf;
+        return DEMI_PART_ENF;
     }
 
     public static double getNbSeuilEnf() {
-        return nbSeuilEnf;
+        return NB_SEUIL_ENF;
     }
 
-    private static double partVeufEnf = 2;
-
-
     public static int[] getLimites() {
-        return limites;
+        return LIMITES;
     }
 
     public static double[] getTaux() {
-        return taux;
+        return TAUX;
     }
 
     public static int getlAbtMax() {
-        return lAbtMax;
+        return L_ABT_MAX;
     }
 
     public static int getlAbtMin() {
-        return lAbtMin;
+        return L_ABT_MIN;
     }
 
     public static double gettAbt() {
-        return tAbt;
+        return T_ABT;
     }
 
     public static double getPlafDemiPart() {
-        return plafDemiPart;
+        return PLAF_DEMI_PART;
     }
 
     public static double getSeuilDecoteDeclarantSeul() {
-        return seuilDecoteDeclarantSeul;
+        return SEUIL_DECOTE_DECLARANT_SEUL;
     }
 
     public static double getSeuilDecoteDeclarantCouple() {
-        return seuilDecoteDeclarantCouple;
+        return SEUIL_DECOTE_DECLARANT_COUPLE;
     }
 
     public static double getDecoteMaxDeclarantSeul() {
-        return decoteMaxDeclarantSeul;
+        return DECOTE_MAX_DECLARANT_SEUL;
     }
 
     public static double getDecoteMaxDeclarantCouple() {
-        return decoteMaxDeclarantCouple;
+        return DECOTE_MAX_DECLARANT_COUPLE;
     }
 
     public static double getTauxDecote() {
-        return tauxDecote;
+        return TAUX_DECOTE;
     }
 }

@@ -34,6 +34,7 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
+                    <excludes>**/com/kerware/simulateur/**</excludes>
                 </configuration>
                 <executions>
                     <execution>

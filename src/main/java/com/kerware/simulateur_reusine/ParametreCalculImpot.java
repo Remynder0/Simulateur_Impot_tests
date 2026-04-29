@@ -6,7 +6,7 @@ package com.kerware.simulateur_reusine;
  * Chaque étape du simulateur lit et écrit ici ses résultats pour permettre
  * de suivre le détail du calcul sans multiplier les objets métiers.
  */
-public class ParametreCalculImpot {
+public final class ParametreCalculImpot {
 
     private int rNet = 0;
     private int nbEnf = 0;
@@ -35,119 +35,119 @@ public class ParametreCalculImpot {
         return rNet;
     }
 
-    public void setrNet(int rNet) {
-        this.rNet = rNet;
+    public void setrNet(int newRNet) {
+        rNet = newRNet;
     }
 
     public int getNbEnf() {
         return nbEnf;
     }
 
-    public void setNbEnf(int nbEnf) {
-        this.nbEnf = nbEnf;
+    public void setNbEnf(int newNbEnf) {
+        nbEnf = newNbEnf;
     }
 
     public int getNbEnfH() {
         return nbEnfH;
     }
 
-    public void setNbEnfH(int nbEnfH) {
-        this.nbEnfH = nbEnfH;
+    public void setNbEnfH(int newNbEnfH) {
+        nbEnfH = newNbEnfH;
     }
 
     public double getrFRef() {
         return rFRef;
     }
 
-    public void setrFRef(double rFRef) {
-        this.rFRef = rFRef;
+    public void setrFRef(double newRFRef) {
+        rFRef = newRFRef;
     }
 
     public double getrImposable() {
         return rImposable;
     }
 
-    public void setrImposable(double rImposable) {
-        this.rImposable = rImposable;
+    public void setrImposable(double newRImposable) {
+        rImposable = newRImposable;
     }
 
     public double getAbt() {
         return abt;
     }
 
-    public void setAbt(double abt) {
-        this.abt = abt;
+    public void setAbt(double newAbt) {
+        abt = newAbt;
     }
 
     public double getNbPtsDecl() {
         return nbPtsDecl;
     }
 
-    public void setNbPtsDecl(double nbPtsDecl) {
-        this.nbPtsDecl = nbPtsDecl;
+    public void setNbPtsDecl(double newNbPtsDecl) {
+        nbPtsDecl = newNbPtsDecl;
     }
 
     public double getNbPts() {
         return nbPts;
     }
 
-    public void setNbPts(double nbPts) {
-        this.nbPts = nbPts;
+    public void setNbPts(double newNbPts) {
+        nbPts = newNbPts;
     }
 
     public double getDecote() {
         return decote;
     }
 
-    public void setDecote(double decote) {
-        this.decote = decote;
+    public void setDecote(double newDecote) {
+        decote = newDecote;
     }
 
     public double getmImpDecl() {
         return mImpDecl;
     }
 
-    public void setmImpDecl(double mImpDecl) {
-        this.mImpDecl = mImpDecl;
+    public void setmImpDecl(double newMImpDecl) {
+        mImpDecl = newMImpDecl;
     }
 
     public double getmImp() {
         return mImp;
     }
 
-    public void setmImp(double mImp) {
-        this.mImp = mImp;
+    public void setmImp(double newMImp) {
+        mImp = newMImp;
     }
 
     public boolean isParIso() {
         return parIso;
     }
 
-    public void setParIso(boolean parIso) {
-        this.parIso = parIso;
+    public void setParIso(boolean newParIso) {
+        parIso = newParIso;
     }
 
     public SituationFamiliale getSitFam() {
         return sitFam;
     }
 
-    public void setSitFam(SituationFamiliale sitFam) {
-        this.sitFam = sitFam;
+    public void setSitFam(SituationFamiliale newSitFam) {
+        sitFam = newSitFam;
     }
 
     public int getImpotRevenuNet() {
         return impotRevenuNet;
     }
 
-    public void setImpotRevenuNet(int impotRevenuNet) {
-        this.impotRevenuNet = impotRevenuNet;
+    public void setImpotRevenuNet(int newImpotRevenuNet) {
+        impotRevenuNet = newImpotRevenuNet;
     }
 
     public double getNbPtsTotal() {
         return nbPtsTotal;
     }
 
-    public void setNbPtsTotal(double nbPtsTotal) {
-        this.nbPtsTotal = nbPtsTotal;
+    public void setNbPtsTotal(double newNbPtsTotal) {
+        nbPtsTotal = newNbPtsTotal;
     }
 }

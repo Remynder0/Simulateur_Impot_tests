@@ -14,38 +14,38 @@ import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getTauxD
  * La décote dépend de la situation du foyer et ne s'applique que si l'impôt
  * calculé reste sous les seuils réglementaires.
  */
-public class CalculDecote {
+public final class CalculDecote {
 
-    ParametreCalculImpot p;
+    private final ParametreCalculImpot parametreCalculImpot;
 
-    CalculDecote(ParametreCalculImpot p) {
-        this.p = p;
+    public CalculDecote(ParametreCalculImpot parametreCalculImpotLocal) {
+        parametreCalculImpot = parametreCalculImpotLocal;
     }
 
     /**
      * Calcule la décote à partir de l'impôt courant et la conserve dans l'état.
      */
-    public void Decote() {
+    public void calculerDecote() {
         double decote = 0;
 
         // Le seuil dépend du profil du déclarant principal.
-        if (  p.getNbPtsDecl() == getNbPartPacseMarie()) {
-            if ( p.getmImp() < getSeuilDecoteDeclarantCouple()) {
-                decote =  getDecoteMaxDeclarantCouple() - ( p.getmImp() * getTauxDecote());
+        if (parametreCalculImpot.getNbPtsDecl() == getNbPartPacseMarie()) {
+            if (parametreCalculImpot.getmImp() < getSeuilDecoteDeclarantCouple()) {
+                decote = getDecoteMaxDeclarantCouple()
+                    - (parametreCalculImpot.getmImp() * getTauxDecote());
             }
-        } else {
-            if ( p.getmImp() < getSeuilDecoteDeclarantSeul() ) {
-                decote = getDecoteMaxDeclarantSeul() - ( p.getmImp() * getTauxDecote());
-            }
+        } else if (parametreCalculImpot.getmImp() < getSeuilDecoteDeclarantSeul()) {
+                decote = getDecoteMaxDeclarantSeul()
+                    - (parametreCalculImpot.getmImp() * getTauxDecote());
         }
 
-        decote = Math.round( decote );
+        decote = Math.round(decote);
         // La décote ne peut jamais dépasser l'impôt restant à payer.
-        if ( p.getmImp() <= decote ) {
-            decote = p.getmImp();
+        if (parametreCalculImpot.getmImp() <= decote) {
+            decote = parametreCalculImpot.getmImp();
         }
 
-        p.setDecote(decote);
-        p.setmImp(Math.round(p.getmImp() - decote));
+        parametreCalculImpot.setDecote(decote);
+        parametreCalculImpot.setmImp(Math.round(parametreCalculImpot.getmImp() - decote));
     }
 }
