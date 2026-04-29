@@ -1,5 +1,11 @@
 package com.kerware.simulateur_reusine;
 
+/**
+ * Regroupe les paramètres fiscaux partagés par les différents calculateurs.
+ *
+ * La classe centralise les barèmes, plafonds et seuils pour éviter de dupliquer
+ * les constantes dans chaque étape du calcul.
+ */
 public class ParametreCalculImpotCommun {
 
     private static int[] limites = new int[]{0, 11294, 28797, 82341, 177106, Integer.MAX_VALUE};

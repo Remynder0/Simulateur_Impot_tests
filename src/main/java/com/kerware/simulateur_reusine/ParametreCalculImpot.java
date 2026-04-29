@@ -1,5 +1,11 @@
 package com.kerware.simulateur_reusine;
 
+/**
+ * Porte l'état intermédiaire du calcul d'impôt.
+ *
+ * Chaque étape du simulateur lit et écrit ici ses résultats pour permettre
+ * de suivre le détail du calcul sans multiplier les objets métiers.
+ */
 public class ParametreCalculImpot {
 
     private int rNet = 0;

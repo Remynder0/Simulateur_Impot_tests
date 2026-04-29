@@ -4,6 +4,12 @@ import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getLimit
 import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getPlafDemiPart;
 import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getTaux;
 
+/**
+ * Calcule l'impôt brut à partir du revenu fiscal de référence et des parts.
+ *
+ * La classe applique les tranches progressives puis le plafonnement lié aux
+ * demi-parts supplémentaires du foyer.
+ */
 public class CalculImpotTranche {
 
     private final ParametreCalculImpot p;

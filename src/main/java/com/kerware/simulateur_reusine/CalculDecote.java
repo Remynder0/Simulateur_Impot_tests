@@ -8,6 +8,12 @@ import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getSeuil
 import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getSeuilDecoteDeclarantSeul;
 import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getTauxDecote;
 
+/**
+ * Applique la décote après le calcul de l'impôt brut.
+ *
+ * La décote dépend de la situation du foyer et ne s'applique que si l'impôt
+ * calculé reste sous les seuils réglementaires.
+ */
 public class CalculDecote {
 
     ParametreCalculImpot p;
@@ -16,9 +22,13 @@ public class CalculDecote {
         this.p = p;
     }
 
+    /**
+     * Calcule la décote à partir de l'impôt courant et la conserve dans l'état.
+     */
     public void Decote() {
         double decote = 0;
 
+        // Le seuil dépend du profil du déclarant principal.
         if (  p.getNbPtsDecl() == getNbPartPacseMarie()) {
             if ( p.getmImp() < getSeuilDecoteDeclarantCouple()) {
                 decote =  getDecoteMaxDeclarantCouple() - ( p.getmImp() * getTauxDecote());
@@ -30,6 +40,7 @@ public class CalculDecote {
         }
 
         decote = Math.round( decote );
+        // La décote ne peut jamais dépasser l'impôt restant à payer.
         if ( p.getmImp() <= decote ) {
             decote = p.getmImp();
         }

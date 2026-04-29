@@ -1,6 +1,12 @@
 package com.kerware.simulateur_reusine;
 
 
+/**
+ * Orchestrateur du calcul d'impôt sur le revenu net.
+ *
+ * Cette classe enchaîne les étapes métier dans l'ordre attendu : abattement,
+ * parts fiscales, impôt par tranche, puis décote.
+ */
 public class Simulateur implements ICalculateurImpot {
 
     ParametreCalculImpot parametreCalculImpot = new ParametreCalculImpot();
@@ -58,8 +64,9 @@ public class Simulateur implements ICalculateurImpot {
     private int impotRevenuNet = 0;
 
 
-    // Fonction de calcul de l'impôt sur le revenu net en France en 2024 sur les revenu 2023
-
+    /**
+     * Calcule l'impôt sur le revenu net pour les paramètres fournis.
+     */
     public long calculImpot( int revNet, SituationFamiliale sitFam, int nbEnfants, int nbEnfantsHandicapes, boolean parentIsol) {
 
         parametreCalculImpot.setrNet(revNet);
@@ -68,6 +75,7 @@ public class Simulateur implements ICalculateurImpot {
         parametreCalculImpot.setNbEnfH(nbEnfantsHandicapes);
         parametreCalculImpot.setParIso(parentIsol);
 
+        // Étape 1 : appliquer l'abattement forfaitaire et produire le revenu fiscal de référence.
         CalculAbattement calculAbattement = new CalculAbattement(parametreCalculImpot);
 
         double revenuFiscalReference = calculAbattement.calculAbattementNet();
@@ -75,12 +83,14 @@ public class Simulateur implements ICalculateurImpot {
 
         System.out.println("Abattement : " + parametreCalculImpot.getAbt());
 
+        // Étape 2 : calculer le nombre de parts du foyer fiscal.
         CalculParts calculParts = new CalculParts(parametreCalculImpot);
 
         calculParts.calculPartsNet();
 
         System.out.println("Nombre de parts : " + parametreCalculImpot.getNbPtsTotal());
 
+        // Étape 3 : calculer l'impôt brut, puis appliquer le plafonnement.
         CalculImpotTranche calculImpotTranche = new CalculImpotTranche(parametreCalculImpot);
 
         double impotApresPlafonnement = calculImpotTranche.calculImpot();
@@ -88,6 +98,7 @@ public class Simulateur implements ICalculateurImpot {
 
         System.out.println("Impot avant décote : " + parametreCalculImpot.getmImp());
 
+        // Étape 4 : appliquer la décote si le foyer est éligible.
         CalculDecote calculDecote = new CalculDecote(parametreCalculImpot);
 
         calculDecote.Decote();
