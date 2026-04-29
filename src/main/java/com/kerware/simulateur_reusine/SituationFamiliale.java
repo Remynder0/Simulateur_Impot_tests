@@ -1,4 +1,4 @@
-package com.kerware.simulateurreusine.Simulateur;
+package com.kerware.simulateur_reusine;
 
 /**
  * Représente les principales situations familiales prises en charge

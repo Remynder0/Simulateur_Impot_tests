@@ -1,4 +1,4 @@
-package com.kerware.simulateurreusine.Simulateur;
+package com.kerware.simulateur_reusine;
 
 /**
  * Contrat d'un calculateur d'impôt sur le revenu.

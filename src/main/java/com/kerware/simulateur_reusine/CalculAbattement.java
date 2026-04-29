@@ -1,8 +1,8 @@
-package com.kerware.simulateurreusine.Simulateur;
+package com.kerware.simulateur_reusine;
 
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getlAbtMax;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getlAbtMin;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.gettAbt;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getlAbtMax;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getlAbtMin;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.gettAbt;
 
 /**
  * Gère le calcul de l'abattement forfaitaire appliqué au revenu net.

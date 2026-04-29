@@ -1,8 +1,8 @@
-package com.kerware.simulateurreusine.Simulateur;
+package com.kerware.simulateur_reusine;
 
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getLimites;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getPlafDemiPart;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getTaux;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getLimites;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getPlafDemiPart;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getTaux;
 
 public class CalculImpotTranche {
 

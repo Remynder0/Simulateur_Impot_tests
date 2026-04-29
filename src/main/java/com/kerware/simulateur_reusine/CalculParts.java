@@ -1,10 +1,10 @@
-package com.kerware.simulateurreusine.Simulateur;
+package com.kerware.simulateur_reusine;
 
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getDemiPartEnf;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getNbPartPacseMarie;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getNbSeuilEnf;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getPartEnf;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getPartVeufEnf;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getDemiPartEnf;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getNbPartPacseMarie;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getNbSeuilEnf;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getPartEnf;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getPartVeufEnf;
 
 /**
  * Calcule le nombre de parts fiscales d'un foyer selon sa situation.

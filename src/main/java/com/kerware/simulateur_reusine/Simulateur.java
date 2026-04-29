@@ -1,4 +1,4 @@
-package com.kerware.simulateurreusine.Simulateur;
+package com.kerware.simulateur_reusine;
 
 
 public class Simulateur implements ICalculateurImpot {

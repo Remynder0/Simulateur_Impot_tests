@@ -1,12 +1,12 @@
-package com.kerware.simulateurreusine.Simulateur;
+package com.kerware.simulateur_reusine;
 
 
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getDecoteMaxDeclarantCouple;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getDecoteMaxDeclarantSeul;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getNbPartPacseMarie;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getSeuilDecoteDeclarantCouple;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getSeuilDecoteDeclarantSeul;
-import static com.kerware.simulateurreusine.Simulateur.ParametreCalculImpotCommun.getTauxDecote;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getDecoteMaxDeclarantCouple;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getDecoteMaxDeclarantSeul;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getNbPartPacseMarie;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getSeuilDecoteDeclarantCouple;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getSeuilDecoteDeclarantSeul;
+import static com.kerware.simulateur_reusine.ParametreCalculImpotCommun.getTauxDecote;
 
 public class CalculDecote {
 

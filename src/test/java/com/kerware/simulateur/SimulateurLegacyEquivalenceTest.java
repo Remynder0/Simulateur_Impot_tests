@@ -19,15 +19,15 @@ class SimulateurLegacyEquivalenceTest {
     @Test
     void les_resultats_modernes_sont_identiques_au_legacy_sur_un_enchainement_de_calculs() {
         Simulateur legacy = new Simulateur();
-        com.kerware.simulateurreusine.Simulateur.Simulateur modern = new com.kerware.simulateurreusine.Simulateur.Simulateur();
+        com.kerware.simulateur_reusine.Simulateur modern = new com.kerware.simulateur_reusine.Simulateur();
 
         assertEquals(
                 legacy.calculImpot(65000, SituationFamiliale.MARIE, 3, 0, false),
-                modern.calculImpot(65000, com.kerware.simulateurreusine.Simulateur.SituationFamiliale.MARIE, 3, 0, false)
+                modern.calculImpot(65000, com.kerware.simulateur_reusine.SituationFamiliale.MARIE, 3, 0, false)
         );
         assertEquals(
                 legacy.calculImpot(200000, SituationFamiliale.CELIBATAIRE, 0, 0, true),
-                modern.calculImpot(200000, com.kerware.simulateurreusine.Simulateur.SituationFamiliale.CELIBATAIRE, 0, 0, true)
+                modern.calculImpot(200000, com.kerware.simulateur_reusine.SituationFamiliale.CELIBATAIRE, 0, 0, true)
         );
     }
 
@@ -39,9 +39,9 @@ class SimulateurLegacyEquivalenceTest {
             boolean parentIsole) {
 
         long legacyResultat = new Simulateur().calculImpot(revenuNet, situationFamiliale, nbEnfants, nbEnfantsHandicapes, parentIsole);
-        long modernResultat = new com.kerware.simulateurreusine.Simulateur.Simulateur().calculImpot(
+        long modernResultat = new com.kerware.simulateur_reusine.Simulateur().calculImpot(
                 revenuNet,
-                com.kerware.simulateurreusine.Simulateur.SituationFamiliale.valueOf(situationFamiliale.name()),
+                com.kerware.simulateur_reusine.SituationFamiliale.valueOf(situationFamiliale.name()),
                 nbEnfants,
                 nbEnfantsHandicapes,
                 parentIsole

@@ -1,9 +1,8 @@
-package com.kerware.simulateurreusine.Simulateur;
-
-import org.junit.jupiter.api.Test;
+package com.kerware.simulateur_reusine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.Test;
 
 class SituationFamilialeTest {
 
